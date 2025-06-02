@@ -1,5 +1,5 @@
 Date Created: 2024-09-04
-Last Updated: 2025-01-01
+Last Updated: 2025-06-01
 
 # Table of Contents
 - [Policy Brief & Purpose](#policy-brief--purpose)
@@ -22,7 +22,7 @@ Last Updated: 2025-01-01
 	- [Additional Technical Controls](#additional-technical-controls)
 	- [Incident Response, Recovery, and Research](#incident-response-recovery-and-research)
 	- [Backup, Redundancy, Protection Protocols](#backup-redundancy-protection-protocols)
-	- [Disaster Recovery](#disaster-recovery)
+	- [Disaster Recovery and Business Continuity](#disaster-recovery-and-business-continuity)
 	- [Accepted Risks & Trade-Offs:](#accepted-risks--trade-offs)
 		- [Keychain Recovery](#keychain-recovery)
 		- [KeepassXC](#keepassxc)
@@ -30,17 +30,15 @@ Last Updated: 2025-01-01
 - [Closing](#closing)
 
 
-
-
 ## Policy Brief & Purpose
 
 This personal security policy outlines the tools and methodologies that will be used to secure the homes personal and private digital assets. 
 
-This policy will mitigate risk and loss by defining procedures for storing, handling, and transferring digital assets as well as procedures for mitigating loss during incidents as well as a disaster recovery plan.
+This policy will mitigate risk and loss by defining procedures for storing, handling, and transferring digital information assets as well as procedures for mitigating loss and recovering from incidents. 
 
 ## Scope
 
-This policy applies to myself and all devices that I have legal ownership over. This policy is shared with and encouraged to be used by those who share residence with myself, friends, family, or any reader that wishes to reduce risk of data and asset loss. 
+This policy applies to myself and all devices that I have legal ownership over. Furthermore, this policy can be shared with and used by roommates, friends, family, or any reader that wishes to reduce risk of data and asset loss.
 
 ## Policy Elements
 
@@ -52,7 +50,7 @@ This data is secret and valuable and is ultimately what this policy seeks to pro
 - Personal Journal/Diary
 - Passwords
 - Banking Information
-- Browsing history and patterns
+- Pictures
 
 
 ### Protect Personal Devices
@@ -67,19 +65,13 @@ Devices are the medium by which members of the home network access and interact 
 	- Personal desktops and laptops should have access to productivity resources like the file server or access personal information like bank accounts. 
 	- TV's, video game consoles, etc should not have access to productivity sources, like the file server. 
 
-- Have security updates installed monthly or as soon as updates are available. 
+- Have security updates installed **monthly** or as soon as updates are available. 
 
 
 While it is not mandatory for all personal devices on the network, there are extra measures that I will take with devices under my personal control, to include:
 
 - Full disk encryption for all laptops, desktops, and phones.
   
-- Webcam shutters, at least for all devices with front facing integrated cameras.
-  
-- Secure and auditable Operating Systems/Software
-	- For personal computers, some version of Linux is preferred ([Zorin](https://zorin.com/os/) or [Fedora](https://fedoraproject.org/) are my preferred)
-	- For Mobile Devices, something like [Graphene](https://grapheneos.org/) or [Calyx](https://calyxos.org/) will be much more secure than the default OS. 
-
 
 
 ### Emails
@@ -87,17 +79,17 @@ While it is not mandatory for all personal devices on the network, there are ext
 Emails remain one of, if not the most, common mediums of attacks for malicious actors. Here we outline some foundational protocols for handling emails as well as some higher level tools we can leverage for additional protection.
 
 #### Basics of Email Security
-- Don't open attachments from unknown senders. (Just the act of opening a PDF is enough to give attackers complete control over your system)
+- Don't open attachments from unknown senders. (Just the act of opening a PDF is enough to give attackers access to your information and systems)
 
 - Be suspicious of clickbait titles and subject lines. (These are often "phishing" or social engineering attempts to get you to voluntarily give up personal information.)
 
 - Look for inconsistencies or "tells" of a malicious/spam email. (grammar mistakes, asking for information)
 
 #### Additional Email Security Tools
-Because emails are a large medium of attack and because we must use email in some capacity to interact with our **confidential data**, (work, banking, taxes, etc) I have determined that the monetary value of the assets being protected warrants a budget to further secure it. To this end, the following additional tools are used:
+Because emails are a large medium of attack and because I must use email in some capacity to interact with my **confidential data**, (work, banking, taxes, etc) I have determined that the monetary value of the assets being protected warrants a budget to further secure it. To this end, the following additional tools are used:
 
 - A paid [Proton Mail](https://proton.me/mail) account which gets us access to:
-	- **Aliases** - allows us to give out and burn an alias if needed, instead of compromising our main email
+	- **Aliases** - allows us to give out and burn an alias if needed, instead of compromising our main email. While this does not directly prevent threats, it does minimize our exposure to potential threats. 
 	- **Threat monitoring** - Proton will do scans of the internet on your behalf to look for compromises, breaches, etc. Better than nothing. 
 	- **VPN** - More on this in the [[#Networking]] section.
 	- **Advanced Spam Filtering**
@@ -105,10 +97,9 @@ Because emails are a large medium of attack and because we must use email in som
 - [Yubikey 2FA](https://www.yubico.com/) authentication devices to secure the email account, as well as other accounts, which grants a higher level of security than other 2FA methods. 
 
 
-
 ### Managing Passwords Properly
 
-Passwords are the keys to the kingdom and the assets within it. As such, securing them should be a top priority. Again, we are faced with a version of the Security Triad problem (Confidentiality, Integrity, Accessibility). Passwords must be kept a secret, they must also be hard to guess or brute-force, and they must be easily accessible so we can use our sensitive data to conduct our day-to-day tasks. The following protocols attempt to prioritize the confidentiality and security of the passwords, while still maintaining an acceptable level of accessibility. 
+Passwords are the keys to the kingdom and the assets within it. As such, securing them is a top priority. Again, we are faced with a version of the Security Triad problem (Confidentiality, Integrity, Accessibility). Passwords must be kept a secret, they must also be hard to guess or brute-force, and they must be easily accessible so we can use our sensitive data to conduct our day-to-day tasks. The following protocols attempt to prioritize the confidentiality and security of the passwords, while still maintaining an acceptable level of accessibility. 
 
 - Choose passwords with at least 12-22 characters (including capital and lower-case letters, numbers and symbols) OR passphrases that are at least 20 characters long. 
 
@@ -125,13 +116,14 @@ Passwords are the keys to the kingdom and the assets within it. As such, securin
 
 ### Multi-Factor Authentication
 
-All online accounts, where possible, should be secured using some kind of multi-factor authentication. This means something in addition to a username and password. Not all multi-factor is equal though, so the method used should be chosen in this order:
+All online accounts, where possible, should be secured using some kind of multi-factor authentication. This means something in addition to a username and password. Not all multi-factor is equal though, so the method used should be prioritized in this order:
 
 1. Hardware key device like an RSA fob or Yubikey
 2. A One-Time-Passcode (OTP) generated using a 2FA app 
 3. A OTP generated and sent via email
 4. Security questions (dont use your dogs name for obvious reasons)
-5. A OTP generated and sent via SMS (avoid this at all costs, but it's better than nothing)
+5. A OTP generated and sent via SMS (not very secure, but it's better than nothing)
+
 
 
 ### Communications
@@ -139,14 +131,22 @@ All online accounts, where possible, should be secured using some kind of multi-
 How we communicate with one another or our resources greatly effects how large or small our attack surface is. There are countless ways to measure and quantify the effectiveness of these measures as well as countless tools to leverage. I have selected a few here that I feel are the most important. 
 
 #### Texting/SMS:
-Default text messaging apps on mobile devices are very insecure so it is recommended that all mobile devices use a trusted and secure texting solution like [Signal](https://signal.org/). 
+Default text messaging apps on mobile devices are not as trusted or secure as solutions like [Signal](https://signal.org/). That being said, sensitive information should not be shared via text message if it can be helped. 
 
 #### Browsing:
 Many web browsers are extremely insecure or, at the very least, force you to behave in insecure ways, (like Chrome dropping support for ad blocking extensions). Below is a list of approved browsers for devices on the network:
-1. [Firefox](https://www.mozilla.org/en-US/firefox/new/) (A great combination of features, user friendliness, and security)
-2. [TOR](https://www.torproject.org/) (Learn about Onion Routing before using it)
-3. [Brave](https://brave.com/) (Like Firefox, but Chromium based, which is also open source)
-4. [Libre Wolf](https://librewolf.net/) (A more locked down version of Firefox with things like anti-digital fingerprinting)
+
+1. [Brave](https://brave.com/) (Chromium based)
+	1. Built-in ad and tracker blocking
+	2. HTTPS Everywhere
+	3. Fingerprinting Protection
+2. Firefox
+	1. Enhanced Tracking Protection (ETP)
+	2. Container Tabs
+3. Safari
+	1. Sandboxing
+	2. Intelligent Tracking Prevention
+
 
 All browsers should have some kind of trusted ad-blocker extension installed on them as well for further protection. 
 1. [UBlock Origin](https://ublockorigin.com/) 
@@ -154,16 +154,21 @@ All browsers should have some kind of trusted ad-blocker extension installed on 
 3. [AdBlock Plus](https://adblockplus.org/)
 
 #### Networking:
- All networking devices, like our home router, should have default credentials changed and all other guest or admin accounts disabled, if present. Ideally, the router should have one account that has a unique username and password that only you know. 
- 
- Personal devices should be configured to use a trusted VPN service provider. While this may be less important when connected to our home network, this becomes increasingly more important to maintain security and privacy when using public WiFi or even cellular data. 
+
+**Router**
+All networking devices, like our home router, should have default credentials changed and all other guest or admin accounts disabled, if present. Ideally, the router should have one account that has a unique username and password that only you know. 
+
+Routers should get routine firmware updates as they become available. 
+
+**VPN** 
+Personal devices should be configured to use a trusted VPN service provider. While this may be less important when connected to our home network, this becomes increasingly more important to maintain security and privacy when using public WiFi or even cellular data. 
 - Best:  [Mullvad VPN](https://mullvad.net/en) (The most private, as it also does not require you to forfeit sensitive financial information)
 - Better: [Proton VPN](https://protonvpn.com/) (Very good option for our users who are using Proton for Email)
 
-There is a ton of information and misinformation on how VPNs work and how necessary they are. Folks who are serious about security and privacy should spend no less than several hours researching and understanding how this VPNs work. For the sake of this document, I am highly recommending that people use them if you are on ANY other network other than the one you were provided by your ISP. And I would still use one even while on your ISP network for a variety of reasons that are beyond the scope of this document.   
+There is a ton of information and misinformation on how VPNs work and how necessary they are. Folks who are serious about security and privacy should spend no less than several hours researching and understanding how VPNs work. For the sake of this document, I am highly recommending that people use them if you are on ANY other network other than the one you were provided by your ISP. And I would still use one even while on your ISP network for a variety of reasons that are beyond the scope of this document.   
   
 #### Third-Party Apps
-Many individuals use third-party apps like Discord, WhatsApp, WeCHAT, and so on, so communicate with friends, family, and coworkers. These apps will have varying levels of security and privacy in place. This document can not cover all of them and their individual levels of trustworthiness, but the reader is encouraged to investigate the security of these apps and use discretion when sharing information on these platforms. 
+Many individuals use third-party apps like Discord, WhatsApp, WeCHAT, and so on, to communicate with friends, family, and coworkers. These apps will have varying levels of security and privacy in place. This document can not cover all of them and their individual levels of trustworthiness, but the reader is encouraged to investigate the security of these apps and use discretion when sharing information on these platforms. 
 
 
 ### Transferring Data Securely
@@ -172,7 +177,7 @@ Transferring data introduces security risk for both the data being shared, or th
 
 - Use data transfer methods that align with the sensitivity of the data:
 	- Networked home storage for users, and services that serve music, memes, and non-sensitive documents.
-	- Flashdrives for semi-sensitive data.
+	- External storage for semi-sensitive data.
 	- Offline, audited, and/or encrypted media for highly sensitive data. 
 
 - Avoid transferring extremely sensitive data from device to device unless necessary. Extremely sensitive data should only be transferred or reviewed on air-gapped devices. 
@@ -180,19 +185,6 @@ Transferring data introduces security risk for both the data being shared, or th
 - Share confidential data over the home network or within home perimeter and not over public WiFi, unless using a VPN. (Tunnel back to home network preferred)
 
 - Ensure that the recipients of the data are trusted and adhere to security policies.
-
-
-> [!EXAMPLE]
-> 
-> You would like to work on your taxes in the comfort of a coffee shop. 
-> 
-> It would be optimal to have the tax documents already on your device or on a password protected drive when you arrive. This prevents you from needing to download a copy of your tax documents over an untrusted public wifi connection. 
-> 
-> When you get home, you can use that same drive or your local network to transfer the documents to another device. You can also safely upload and submit your documents to tax prep software from any device on your trusted home network. 
-> 
-> Again, the goal to avoid sending any sensitive info over a network that you can't verify or trust to be safe. 
-
-
 
 
 ### Additional Operational Controls
@@ -273,7 +265,7 @@ To ensure data is not lost due to compromise, error, natural disaster, or otherw
   
 	- Confidential files that under no circumstances can be seen by other eyes (example: bitcoin seed phrase, KeepassXC database) will be kept on an offline encrypted drive. Drive will be encrypted using Veracrypt and a SHA256(twofish(serpent())) scheme secured by a 24+ character password that will never be written down or recorded anywhere and will be memorized. 
 	  
-	- Sensitive data that needs an off-site back up will be kept in Proton Drive which is "trusted" to be encrypted and private. This is a situation where trust is sort of unavoidable, for my situation at least. So I trust Proton Drive more than another cloud provider because Proton Drive is secured by my Yubikey. This makes it more secure, if only marginally, than other options like safety deposit box, cloud storage or VM that dont have 2FA keys, or leaving the files with a relative. 
+	- Sensitive data that needs an off-site back up will be kept in Proton Drive which is "trusted" to be encrypted and private. This is a situation where trust is sort of unavoidable, for my situation at least. So I trust Proton Drive more than another cloud provider because Proton Drive is secured by my Yubikey. This makes it more secure, if only marginally, than other options like safety deposit box, cloud storage or VM that doen't have 2FA keys, or leaving the files with a relative. 
 
 - Another cold backup of the warm backup is made and kept with relatives, just as a convenience recovery. This would be movies, music, very insensitive files, family photos, etc. 
 
@@ -288,11 +280,11 @@ To ensure data is not lost due to compromise, error, natural disaster, or otherw
 
 
 
-### Disaster Recovery
+### Disaster Recovery and Business Continuity
 
 Disaster Recovery depends heavily on the robustness and adherence to the backup protocols. 
 
-One additional measure not mentioned as backup, because it technically is not, is having a live bootable USB with a vetted and trusted image on the keychain at all times, in addition to the KeepassXC backup and Yubikey. This combination means that from anywhere in the world, I should be able to use any host to securely access my data in the event of catastrophe. 
+One additional measure not mentioned as backup, because it technically is not, is having a live bootable USB with a vetted and trusted image on the keychain at all times, in addition to the KeepassXC backup and Yubikey. This combination means that from anywhere in the world, I should be able to use any host to securely access my data in the event of catastrophe. Thus having a robust continuity scheme
 
 In the event that there is any kind of loss or compromise, given the technologies and protocols in place, we should be able to recover or at least continue to function in day-to-day tasks/work within 24 hours. Example situations and procedures outlined:
 
